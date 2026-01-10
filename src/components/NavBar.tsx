@@ -1,50 +1,52 @@
-import { useState, useContext, createContext, useEffect, Children } from "react";
-import { theme } from "../styles/theme";
+import { Link, useLocation } from "react-router-dom"
+import { motion } from 'framer-motion'
+import { useTheme } from "../context/ThemeContext"
+import { useEffect, useState } from "react"
+import { theme } from "../styles/theme"
 
-interface ThemeContextType {
-    isDarkMode: boolean
-    toggleTheme: () => void
-    currentTheme: typeof theme.dark | typeof theme.light
-}
-
-const ThemeContext = createContext({
-    isDarkMode: true,
-    toggleTheme: () => { },
-    currentTheme: theme.dark
-
-})
-
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isDarkMode, setIsDarkMode] = useState(true)
-    const currentTheme = isDarkMode ? theme.dark : theme.light
-
+const Navbar = () => {
+    const { isDarkMode, currentTheme, toggleTheme } = useTheme()
+    const location = useLocation()
+    const [activeTab, setActiveTab] = useState(location.pathname)
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme')
-        if (savedTheme) {
-            setIsDarkMode(savedTheme === "dark")
-        }
-    }, [])
+        setActiveTab(location.pathname)
+    }, [location])
 
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', isDarkMode)
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+    const navItems = [
+        { path: '/', label: 'Home' },
+        { path: '/about', label: 'About' },
+        { path: '/contact', label: 'Contact' }
 
-    }, [isDarkMode])
-
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode)
-    }
+    ]
 
     return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme, currentTheme }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+        <header>
+            <nav>
+                <div>
+                    {/* Added logo/icon */}
+                    <Link>
+                        <img src="" alt="" />
+                    </Link>
+
+                    <div>
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.path}
+                                to={item.path}
+
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
+                    </div>
+                    <button>
+
+                    </button>
+                </div>
+            </nav>
+        </header>
+    )
 }
 
-export const useTheme = () => useContext(ThemeContext)
-
-
-
-
+export default Navbar;
