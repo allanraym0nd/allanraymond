@@ -14,6 +14,7 @@ export const FadeInSection = ({ children, delay = 0 }: FadeInSectionProps) => {
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.5, delay }}
         >
             {children}
         </motion.div>

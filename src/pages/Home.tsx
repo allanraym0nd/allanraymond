@@ -10,13 +10,32 @@ const Home = () => {
     return (
         <div>
             <FadeInSection>
-                <section>
-                    <div>
-                        <TypeAnimation />
-                    </div>
-                    <p>
+                <section className="space-y-4">
+                    <motion.div
+                        className="text-2xl sm:text-3xl font-bold"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <TypeAnimation
+                            sequence={[
+                                'hello, allan here!'
+                            ]}
+                            wrapper="h1"
+                            cursor={true}
+                            repeat={0}
+                            speed={50}
+                            style={{ display: "inline-block" }}
+                        />
+                    </motion.div>
+                    <motion.p
+                        className="text-sm sm:text-base leading-relaxed"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                    >
                         your average boba enjoyer from socal trying to get a fucking grip
-                    </p>
+                    </motion.p>
                 </section>
             </FadeInSection>
 
@@ -28,12 +47,12 @@ const Home = () => {
             </section>
         </FadeInSection> */}
 
-            <FadeInSection>
-                <section>
+            <FadeInSection delay={0.4}>
+                <motion.section className="mt-4">
                     <div>
                         <SpotifyPlaying />
                     </div>
-                </section>
+                </motion.section>
             </FadeInSection>
 
 
