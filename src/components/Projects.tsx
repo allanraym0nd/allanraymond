@@ -12,7 +12,7 @@ interface ProjectProps {
     }
 }
 
-export const Projects = ({ project }: ProjectProps) => {
+export const Project = ({ project }: ProjectProps) => {
     const [isHovering, setIsHovering] = useState(false)
     const [position, setPosition] = useState({ x: 0, y: 0 })
 
