@@ -1,50 +1,43 @@
-import { useState, useContext, createContext, useEffect, Children } from "react";
-import { theme } from "../styles/theme";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { theme } from '../styles/theme';
 
 interface ThemeContextType {
-    isDarkMode: boolean
-    toggleTheme: () => void
-    currentTheme: typeof theme.dark | typeof theme.light
+    isDarkMode: boolean;
+    toggleTheme: () => void;
+    currentTheme: typeof theme.light | typeof theme.dark;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
     isDarkMode: true,
     toggleTheme: () => { },
-    currentTheme: theme.dark
+    currentTheme: theme.dark,
+});
 
-})
-
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isDarkMode, setIsDarkMode] = useState(true)
-    const currentTheme = isDarkMode ? theme.dark : theme.light
-
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [isDarkMode, setIsDarkMode] = useState(true);
+    const currentTheme = isDarkMode ? theme.dark : theme.light;
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme')
+        const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
-            setIsDarkMode(savedTheme === "dark")
+            setIsDarkMode(savedTheme === 'dark');
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
-        document.documentElement.classList.toggle('dark', isDarkMode)
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
-
-    }, [isDarkMode])
+        document.documentElement.classList.toggle('dark', isDarkMode);
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }, [isDarkMode]);
 
     const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode)
-    }
+        setIsDarkMode(!isDarkMode);
+    };
 
     return (
         <ThemeContext.Provider value={{ isDarkMode, toggleTheme, currentTheme }}>
             {children}
         </ThemeContext.Provider>
     );
-}
+};
 
-export const useTheme = () => useContext(ThemeContext)
-
-
-
-
+export const useTheme = () => useContext(ThemeContext); 

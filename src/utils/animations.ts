@@ -1,4 +1,6 @@
-export const cardVariants = {
+import { Variants } from 'framer-motion';
+
+export const cardVariants: Variants = {
     hidden: {
         x: -300,
         y: 500,
@@ -9,6 +11,7 @@ export const cardVariants = {
     visible: (index: number) => ({
         x: 0,
         y: 0,
+        rotate: index % 2 === 0 ? -6 : 4,
         opacity: 1,
         scale: 1,
         transition: {
@@ -31,18 +34,18 @@ export const sectionVariants = {
             duration: 0.4
         }
     }
-}
+} as const;
 
 export const titleVariants = {
     hover: {
         x: 4,
         transition: {
             type: "tween",
-            ease: "easout",
+            ease: "easeOut",
             duration: 0.2
         }
     }
-}
+} as const;
 
 export const containerVariants = {
     hover: {
@@ -51,4 +54,4 @@ export const containerVariants = {
             duration: 0.2
         }
     }
-}
+} as const;

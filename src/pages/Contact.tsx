@@ -1,13 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { usePageTitle } from "../hooks/usePageTitle";
-import { FadeInSection } from "../utils/FadeInSection";
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
+import { FadeInSection } from '../utils/FadeInSection';
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect, useState } from "react";
 
-
 const Contact = () => {
-    usePageTitle('Contact')
-    const [selectedEvent, setSelectedEvent] = useEffect<string | null>(null)
+    usePageTitle('Contact');
+    const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
     const cardHoverVariants = {
         initial: { scale: 1, y: 0 },
@@ -18,10 +17,9 @@ const Contact = () => {
                 duration: 0.2,
                 ease: [0.4, 0, 0.2, 1]
             }
-
         }
+    } as const;
 
-    }
     const iconHoverVariants = {
         initial: { scale: 1, rotate: 0 },
         hover: {
@@ -32,7 +30,7 @@ const Contact = () => {
                 ease: [0.4, 0, 0.2, 1]
             }
         }
-    }
+    } as const;
 
     const containerVariants = {
         hidden: { opacity: 0, y: 20 },
@@ -51,9 +49,8 @@ const Contact = () => {
                 duration: 0.3,
                 ease: [0.4, 0, 1, 1]
             }
-
         }
-    }
+    } as const;
 
     const calendarVariants = {
         hidden: { opacity: 0, scale: 0.95, y: 30 },
@@ -76,61 +73,59 @@ const Contact = () => {
                 ease: [0.4, 0, 1, 1]
             }
         }
-    };
+    } as const;
+
 
     const eventTypes = [
         {
-            id: "phillip-che/15-minutes-chat-with-me",
+            id: "allan-raymond/15-minutes-chat-with-me",
             title: "15 Min Chat",
             description: "Quick chat",
             duration: "15 min"
         },
         {
-            id: "phillip-che/30-minutes-chat-with-me",
+            id: "allan-raymond/30-minutes-chat-with-me",
             title: "30 Min Chat",
             description: "Standard meeting",
             duration: "30 min"
         },
         {
-            id: "phillip-che/60-minutes-chat-with-me",
+            id: "allan-raymond/60-minutes-chat-with-me",
             title: "60 Min Chat",
             description: "In-depth conversation",
             duration: "60 min"
         }
     ];
 
-    // no idea what this is doing
     useEffect(() => {
         (async function () {
-            const cal = await getCalApi()
-            cal('ui', {
+            const cal = await getCalApi();
+            cal("ui", {
                 "styles": {
-                    'branding': { "brandColor": "#000000" }
+                    "branding": { "brandColor": "#000000" }
                 }
-            })
-        })
-
-    }, [selectedEvent])
+            });
+        })();
+    }, [selectedEvent]);
 
     return (
         <div>
             <FadeInSection>
-                <motion.h1>
+                <motion.h1 className="text-3xl font-bold">
                     Contact
                 </motion.h1>
-                <motion.p>
-                    Let's Connect
+                <motion.p className="text-sm sm:text-base leading-relaxed mb-6">
+                    Let's connect.
                 </motion.p>
-
             </FadeInSection>
 
             <FadeInSection delay={0.2}>
                 <div className="space-y-4">
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Connect with me through any of these platforms
+                        Connect with me through any of these platforms.
                     </p>
 
-                    <div>
+                    <div className="grid grid-cols-2 gap-3">
                         <motion.a
                             href="mailto:raymonda916@gmail.com"
                             className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all group"
@@ -138,28 +133,24 @@ const Contact = () => {
                             initial="initial"
                             whileHover="hover"
                             whileTap={{ scale: 0.98 }}
-
                         >
                             <motion.div
                                 className="flex-shrink-0"
                                 variants={iconHoverVariants}
                             >
                                 <svg className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-
                                     <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
                                     <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-
                                 </svg>
                             </motion.div>
                             <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900 dark:text-white">Email</p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400 truncate">raymonda916@gmail.com</p>
-
                             </div>
                         </motion.a>
 
                         <motion.a
-                            href="https://www.instagram.com/philllip.che/"
+                            href="https://www.instagram.com/allanraym0nd/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all group"
@@ -178,12 +169,12 @@ const Contact = () => {
                             </motion.div>
                             <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900 dark:text-white">Instagram</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">@philllip.che</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">@allanraym0nd</p>
                             </div>
                         </motion.a>
 
                         <motion.a
-                            href="https://linkedin.com/in/phillipche"
+                            href="https://www.linkedin.com/in/allan-raymond-6506b536b/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all group"
@@ -202,12 +193,12 @@ const Contact = () => {
                             </motion.div>
                             <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900 dark:text-white">LinkedIn</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">in/phillipche</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">in/allanraymond</p>
                             </div>
                         </motion.a>
 
                         <motion.a
-                            href="https://discord.gg/mnp8Gf2mP2"
+                            href="https://open.spotify.com/user/epab74l972kbr7pzlbvgyr0ne?si=8fdfbc28e6244016"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all group"
@@ -225,20 +216,18 @@ const Contact = () => {
                                 </svg>
                             </motion.div>
                             <div className="min-w-0 flex-1">
-                                <p className="text-sm font-medium text-gray-900 dark:text-white">Discord</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Join Server</p>
+                                <p className="text-sm font-medium text-gray-900 dark:text-white">Spotify</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">good music taste</p>
                             </div>
                         </motion.a>
                     </div>
                 </div>
-
-
             </FadeInSection>
 
-            <FadeInSection>
+            <FadeInSection delay={0.4}>
                 <div className="mt-8 space-y-6">
-                    <div >
-                        <h2 className="text-lg font-medium mb-2">Book a call</h2>
+                    <div>
+                        <h2 className="text-lg font-medium mb-2">Book a Call</h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                             Schedule a call with me if you need a more in-depth conversation about anything you want!
                         </p>
@@ -252,13 +241,13 @@ const Contact = () => {
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
-                                className="grid grid-cols-1 md:grid-cols-3 gap-4 "
+                                className="grid grid-cols-1 md:grid-cols-3 gap-4"
                             >
                                 {eventTypes.map((event, index) => (
                                     <motion.button
                                         key={event.id}
                                         onClick={() => setSelectedEvent(event.id)}
-                                        className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transiton-all text-left group h-full flex flex-col"
+                                        className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all text-left group h-full flex flex-col"
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         initial={{ opacity: 0, y: 20 }}
@@ -272,25 +261,23 @@ const Contact = () => {
                                             }
                                         }}
                                     >
-                                        <div className="flex justify-between items-start ,mb-2">
+                                        <div className="flex justify-between items-start mb-2">
                                             <h3 className="font-medium">{event.title}</h3>
-                                            <span className="text-xs  text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
+                                            <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
                                                 {event.duration}
                                             </span>
-
                                         </div>
-                                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 flex-grow">{event.description}</p>
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 flex-grow">
+                                            {event.description}
+                                        </p>
                                         <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors mt-auto">
                                             <span>Select this option</span>
                                             <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
                                         </div>
-
-
                                     </motion.button>
                                 ))}
-
                             </motion.div>
                         ) : (
                             <motion.div
@@ -345,12 +332,11 @@ const Contact = () => {
                                 </motion.div>
                             </motion.div>
                         )}
-
                     </AnimatePresence>
                 </div>
             </FadeInSection>
         </div>
-    )
-}
+    );
+};
 
 export default Contact;

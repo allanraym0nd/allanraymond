@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
     html {
@@ -10,7 +13,7 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-        @apply text-gray-900 dark:text-white font-medium trackig tight
+        @apply text-gray-900 dark:text-white font-medium tracking-tight
     }
 
     h1 {
@@ -22,19 +25,17 @@
     }
 
     p {
-        @apply text-sm leading-relazed
+        @apply text-sm leading-relaxed
     }
 }
 
 @layer components {
     .container-width {
         @apply max-w-2xl mx-auto px-4 sm:px-6
-        /* px -> horizontal padding*/
     }
 
     .section {
         @apply py-6 sm:py-8
-        /* px -> vertical padding*/
     }
 
     .card {

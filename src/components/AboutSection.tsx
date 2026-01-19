@@ -1,11 +1,26 @@
-import { motion } from "framer-motion";
-import { sections } from "../data/sections";
-import { sectionVariants, titleVariants } from "../utils/animations";
-import { useState } from "react";
-import { FadeInSection } from "../utils/FadeInSection";
+import { motion } from 'framer-motion';
+import { sections } from '../data/sections';
+import { sectionVariants, titleVariants } from '../utils/animations';
+import { useState } from 'react';
+import { useInView } from '../hooks/useInView';
+
+const FadeInSection = ({ children }: { children: React.ReactNode }) => {
+    const { ref, isInView } = useInView();
+
+    return (
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 1 }}
+        >
+            {children}
+        </motion.div>
+    );
+};
 
 export const AboutSection = () => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
         <div className="space-y-6">
@@ -24,26 +39,24 @@ export const AboutSection = () => {
                         }}
                     >
                         <motion.div
-                            className="grid grid-cols sm:grid-cols-[130px_1fr] gap-1 sm:gap-4 cursor-default"
+                            className="grid grid-cols-1 sm:grid-cols-[130px_1fr] gap-1 sm:gap-4 cursor-default"
                             variants={sectionVariants}
                             onHoverStart={() => setHoveredIndex(index)}
                             onHoverEnd={() => setHoveredIndex(null)}
                             style={{
-                                transformOrigin: "center left"
+                                transformOrigin: 'center left'
                             }}
-
                         >
                             <motion.h2
                                 className="text-lg font-semibold pt-4 cursor-default"
                                 variants={titleVariants}
-
                             >
                                 {section.title}
-
                             </motion.h2>
                             {section.title === "Timeline" ? (
                                 <div className="relative pl-4 pt-4">
-                                    <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700">{section.content}</div>
+                                    <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
+                                    {section.content}
                                 </div>
                             ) : (
                                 <motion.div
@@ -54,13 +67,10 @@ export const AboutSection = () => {
                                     {section.content}
                                 </motion.div>
                             )}
-
-
                         </motion.div>
-
                     </motion.section>
                 </FadeInSection>
             ))}
         </div>
-    )
-}
+    );
+}; 

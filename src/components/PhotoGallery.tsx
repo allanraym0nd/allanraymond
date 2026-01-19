@@ -26,7 +26,23 @@ export const PhotoGallery = ({ isMobile }: PhotoGalleryProps) => {
                     className={`absolute ${photo.style}`}
                     custom={index}
                     variants={cardVariants}
-                > </motion.div>
+                    initial="hidden"
+                    animate="visible"
+                    style={{ zIndex: getZIndex(index) }}
+                    drag={!isMobile}
+                    dragConstraints={{
+                        top: -50,
+                        left: -750,
+                        right: 750,
+                        bottom: 600
+                    }}
+                    dragElastic={0.1}
+                    whileHover={!isMobile ? { scale: 1.02 } : undefined}
+                    whileDrag={{ scale: 1.1, zIndex: 50 }}
+
+                >
+                    <PhotoCard {...photo} isMobile={isMobile} />
+                </motion.div>
 
             ))}
         </motion.div>

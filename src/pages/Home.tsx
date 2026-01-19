@@ -11,6 +11,9 @@ const Home = () => {
         <div>
             <FadeInSection>
                 <section className="space-y-4">
+                    <div className="bg-white dark:bg-red-500 p-8 text-black dark:text-white mb-4">
+                        Dark mode test: This should be RED background with WHITE text in dark mode
+                    </div>
                     <motion.div
                         className="text-2xl sm:text-3xl font-bold"
                         initial={{ opacity: 0, y: 20 }}
