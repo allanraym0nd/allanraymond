@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
     html {
@@ -9,11 +10,16 @@
     }
 
     body {
-        @apply antialiased text-sm text-gray-600 dark:text-gray-300
+        @apply antialiased text-sm;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-        @apply text-gray-900 dark:text-white font-medium tracking-tight
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-medium tracking-tight;
     }
 
     h1 {

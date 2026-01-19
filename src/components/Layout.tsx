@@ -8,7 +8,7 @@ const Layout = ({ children }: LayoutProps) => {
     const { currentTheme } = useTheme()
 
     return (
-        <div>
+        <div className="min-h-screen bg-white dark:bg-black text-gray-600 dark:text-gray-300">
             {children}
         </div>
     )
@@ -16,4 +16,3 @@ const Layout = ({ children }: LayoutProps) => {
 }
 
 export default Layout;
-
