@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSpotify } from '../hooks/useSpotify';
-import { Spotify } from 'react-spotify-embed';
+import { useSpotify } from '../hooks/useSpotifyMock'; // or your mock hook
+import SpotifyEmbed from './SpotifyEmbed'; // NEW
 import FadeIn from '../utils/FadeIn';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
@@ -16,24 +16,18 @@ const SpotifyPlaying = () => {
     const tracksRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Always show current track if it exists
         if (currentTrack) {
             setDisplayTrack(currentTrack);
             if (activeList === 'top') {
-                // Show top 4 tracks when viewing top tracks
                 setTracksList(topTracks.slice(0, 4));
             } else {
-                // Show recent tracks (excluding current track if it's in the list)
                 setTracksList(recentTracks.slice(0, 4));
             }
         } else {
-            // No current track playing
             if (activeList === 'top') {
-                // Show #1 top track as main and rest in list
                 setDisplayTrack(topTracks[0]);
                 setTracksList(topTracks.slice(1));
             } else {
-                // Show most recent track as main and rest in list
                 setDisplayTrack(recentTracks[0]);
                 setTracksList(recentTracks.slice(1, 5));
             }
@@ -43,7 +37,6 @@ const SpotifyPlaying = () => {
     const handleTabClick = (type: TrackListType) => {
         setActiveList(type);
 
-        // Check if tracks section is not fully visible
         if (tracksRef.current) {
             const rect = tracksRef.current.getBoundingClientRect();
             const isFullyVisible = (
@@ -51,7 +44,6 @@ const SpotifyPlaying = () => {
                 rect.bottom <= window.innerHeight
             );
 
-            // Only scroll if not fully visible
             if (!isFullyVisible) {
                 tracksRef.current.scrollIntoView({
                     behavior: 'smooth',
@@ -61,14 +53,13 @@ const SpotifyPlaying = () => {
         }
     };
 
-    // Extracted button component
     const TabButtons = () => (
         <div className="flex space-x-2">
             <button
                 onClick={() => handleTabClick('recent')}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${activeList === 'recent'
-                        ? 'text-gray-900 dark:text-white font-medium'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-gray-900 dark:text-white font-medium'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                     }`}
                 style={{
                     backgroundColor: activeList === 'recent' ? currentTheme.nav.bubble : 'transparent',
@@ -80,8 +71,8 @@ const SpotifyPlaying = () => {
             <button
                 onClick={() => handleTabClick('top')}
                 className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${activeList === 'top'
-                        ? 'text-gray-900 dark:text-white font-medium'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-gray-900 dark:text-white font-medium'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                     }`}
                 style={{
                     backgroundColor: activeList === 'top' ? currentTheme.nav.bubble : 'transparent',
@@ -100,7 +91,6 @@ const SpotifyPlaying = () => {
 
     return (
         <div className="w-full">
-            {/* Header with title and buttons - Desktop + Mobile (when no track playing) */}
             <div className={`mb-4 ${displayTrack ? 'hidden sm:block' : 'block'}`}>
                 <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold">{getTitle()}</h2>
@@ -109,9 +99,7 @@ const SpotifyPlaying = () => {
             </div>
 
             <div className="flex flex-col md:flex-row md:gap-4">
-                {/* Main Track Display */}
                 <div className="w-full md:w-1/2 mb-4 md:mb-0">
-                    {/* Mobile Title - Only shown when track is playing */}
                     {displayTrack && (
                         <div className="mb-4 sm:hidden">
                             <h2 className="text-lg font-semibold">{getTitle()}</h2>
@@ -128,12 +116,12 @@ const SpotifyPlaying = () => {
                         >
                             {displayTrack && (
                                 <>
-                                    <Spotify
+                                    <SpotifyEmbed
                                         wide
                                         link={displayTrack.spotifyUrl}
                                         className="w-full sm:hidden"
                                     />
-                                    <Spotify
+                                    <SpotifyEmbed
                                         link={displayTrack.spotifyUrl}
                                         className="hidden sm:block w-full"
                                     />
@@ -142,7 +130,6 @@ const SpotifyPlaying = () => {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* Mobile Buttons - Only shown when track is playing */}
                     {displayTrack && (
                         <div className="mt-4 sm:hidden">
                             <TabButtons />
@@ -150,7 +137,6 @@ const SpotifyPlaying = () => {
                     )}
                 </div>
 
-                {/* Recent/Top Tracks List */}
                 <div ref={tracksRef} className="w-full md:w-1/2">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -163,7 +149,7 @@ const SpotifyPlaying = () => {
                             <div className="grid gap-3">
                                 {tracksList.map((track, index) => (
                                     <FadeIn key={index} delay={1 + index * 0.3}>
-                                        <Spotify
+                                        <SpotifyEmbed
                                             wide
                                             link={track.spotifyUrl}
                                             className="w-full"

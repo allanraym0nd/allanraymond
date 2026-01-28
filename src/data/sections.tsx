@@ -116,26 +116,26 @@ export const sections = [
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
                 {[
                     {
-                        title: "YouTube",
-                        description: "documenting my life as a software engineer",
+                        title: "Big Sports Fan",
+                        description: "weekends are for the sports",
                         stats: "19 videos",
                         color: "rose"
                     },
                     {
-                        title: "Real Estate Investing",
-                        description: "playing monopoly but with real money",
+                        title: "Football Player",
+                        description: "best midfielder around",
                         stats: "0 properties",
                         color: "blue"
                     },
                     {
-                        title: "Stocks and Crypto",
-                        description: "buying high and selling low is my philosophy",
+                        title: "Photography",
+                        description: "self-proclaimed photographer",
                         stats: "-$25,000 profit",
                         color: "green"
                     },
                     {
-                        title: "Mechanical Keyboards",
-                        description: "fun but will be the reason why im homeless",
+                        title: "Art",
+                        description: "i enjoy looking at art",
                         stats: "3 custom keyboards",
                         color: "purple"
                     },
@@ -152,9 +152,9 @@ export const sections = [
                             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                                 {hobby.description}
                             </p>
-                            <p className={`text-xs text-${hobby.color}-500 dark:text-${hobby.color}-500 mt-2 font-medium`}>
+                            {/* <p className={`text-xs text-${hobby.color}-500 dark:text-${hobby.color}-500 mt-2 font-medium`}>
                                 {hobby.stats}
-                            </p>
+                            </p> */}
                         </div>
                     </motion.div>
                 ))}
