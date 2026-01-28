@@ -21,10 +21,10 @@ export const photos = [
         style: "sm:left-[45%] top-8 right-8 rotate-[3deg] z-30"
     },
     {
-        image: "/images/WhatsApp Image 2026-01-19 at 5.14.54 PM.jpeg",
+        image: "/images/WhatsApp Image 2026-01-28 at 11.15.12 AM.jpeg",
         date: "January 2026",
         location: "home",
-        caption: "watched the 49ers send the eagles home",
+        caption: "bears rams in primetime!",
         style: "sm:left-[75%] top-8 right-12 rotate-[3deg] z-40"
     }
 ]
