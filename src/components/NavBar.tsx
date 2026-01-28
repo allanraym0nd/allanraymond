@@ -26,7 +26,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                     {/* Added logo/icon */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <img src="src/Assets/06e82bfcbaec55d606498426033ffbb9.jpg" alt="Allan Raymond" className="w-8 h-8 rounded-lg" />
+                        <img src="/images/06e82bfcbaec55d606498426033ffbb9.jpg" alt="Allan Raymond" className="w-8 h-8 rounded-lg" />
                     </Link>
 
                     <div className="flex items-center space-x-1">
