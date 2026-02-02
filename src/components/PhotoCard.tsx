@@ -10,7 +10,7 @@ interface PhotoCardProps {
     isMobile: boolean
 }
 
-export const PhotoCard = ({ image, date, location, caption, isMobile }: PhotoCardProps) => {
+const PhotoCard = ({ image, date, location, caption, isMobile }: PhotoCardProps) => {
     const [isFlipped, setIsFlipped] = useState(false)
     const { currentTheme } = useTheme()
 
@@ -76,3 +76,5 @@ export const PhotoCard = ({ image, date, location, caption, isMobile }: PhotoCar
         </>
     )
 }
+
+export default PhotoCard;
