@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PhotoCard } from "./PhotoCard";
+import PhotoCard from "./PhotoCard";
 import { photos } from '../data/photos';
 import { cardVariants } from "../utils/animations";
 
