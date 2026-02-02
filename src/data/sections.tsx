@@ -58,7 +58,7 @@ export const sections = [
                 {[
                     {
                         company: 'Growth Hackers',
-                        date: "2025",
+                        date: "2025-2025",
                         title: "Data Science Intern",
                         description: ["worked on various projects including automating data pipelines"],
                         dotColor: "bg-blue-500"
@@ -66,7 +66,7 @@ export const sections = [
                     },
                     {
                         company: "UoN",
-                        date: "2024",
+                        date: "2024-2024",
                         title: "Network And Systems Support",
                         description: ["gained valuable experience in network management"],
                         dotColor: "bg-amber-300"
