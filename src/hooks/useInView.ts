@@ -6,11 +6,12 @@ export const useInView = (threshold = 0.1) => {
     const [isInView, setIsNewView] = useState(false)
 
     useEffect(() => {
+        // intersectionObserver -> watches when elements enter/exit the viewport:
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting) { // if element enters view port change state
                     setIsNewView(true)
-                    observer.unobserve(entry.target)
+                    observer.unobserve(entry.target) // then stops observing
                 }
             },
             {
